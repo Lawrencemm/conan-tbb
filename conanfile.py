@@ -29,7 +29,7 @@ that have future-proof scalability"""
            self.settings.compiler == "apple-clang" and \
            Version(self.settings.compiler.version.value) < "8.0":
             raise ConanInvalidConfiguration("%s %s couldn't be built by apple-clang < 8.0" % (self.name, self.version))
-        if self.settings.os != "Windows" and self.options.shared:
+        if self.settings.os != "Windows" and not self.options.shared:
             self.output.warn("Intel-TBB strongly discourages usage of static linkage")
         if self.settings.os != "Windows" and self.options.tbbproxy and \
            (not self.options.shared or \
